@@ -21,6 +21,11 @@ import androidx.compose.ui.unit.dp
 import com.example.basiccodelabs.ui.theme.BasicCodelabsTheme
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.material3.Button
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +35,32 @@ class MainActivity : ComponentActivity() {
                 MyApp(modifier = Modifier.fillMaxSize())
             }
         }
+    }
+}
+@Composable
+fun OnboardingScreen(modifier: Modifier){
+    var shouldShowOnboarding by remember { mutableStateOf(true) }
+
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
+        Text("Welcome to the Basics Codelab!")
+        Button(
+            modifier =Modifier.padding(vertical = 24.dp),
+            onClick = { shouldShowOnboarding = false }
+        ) {
+            Text("Continue")
+
+        }
+    }
+}
+@Preview(showBackground = true, widthDp = 320, heightDp = 320)
+@Composable
+fun OnboardingPreview(){
+    BasicCodelabsTheme {
+        OnboardingScreen(modifier = Modifier)
     }
 }
 
@@ -55,7 +86,8 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         ) {
         Row(modifier = Modifier.padding(24.dp)) {
             Column(
-                modifier= Modifier.weight(1f)
+                modifier= Modifier
+                    .weight(1f)
                     .padding(bottom = extraPadding)
             ) {
                 Text(text = "Hello")
