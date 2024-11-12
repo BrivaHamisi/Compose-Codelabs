@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.material3) // or latest version
+    implementation(libs.androidx.material.icons.extended)
     implementation(platform(libs.androidx.compose.bom.v20240901))
     implementation(libs.androidx.lifecycle.runtime.ktx.v260) // Ensure the latest version
     implementation(libs.androidx.activity.compose.v170)

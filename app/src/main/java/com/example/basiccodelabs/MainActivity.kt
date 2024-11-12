@@ -30,7 +30,17 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.animation.core.spring
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.coerceAtLeast
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Icon
+import androidx.compose.material.icons.Icons.Filled
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.ui.res.stringResource
+
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,6 +85,13 @@ fun OnboardingScreen(
         }
     }
 }
+
+@Preview(
+    showBackground = true,
+    widthDp = 320,
+    uiMode = UI_MODE_NIGHT_YES,
+    name = "GreetingsPreviewDark"
+)
 @Preview(showBackground = true, widthDp = 320, heightDp = 320)
 @Composable
 fun OnboardingPreview(){
@@ -116,16 +133,35 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                     .padding(bottom = extraPadding.coerceAtLeast(0.dp))
             ) {
                 Text(text = "Hello")
-                Text(text = name)
+                Text(text = name, style = MaterialTheme.typography.headlineMedium.copy(
+                    fontWeight = FontWeight.ExtraBold
+                ))
+                if (expanded){
+                    Text(text = ("Composem ipsum color sit lazy, \" +\n" +
+                            " \"padding theme elit, sed do bouncy.").repeat(4),)
+                }
             }
-            ElevatedButton(onClick = { expanded = !expanded }) {
-                Text((if (expanded) "Show less" else "Show more"))
+            IconButton(onClick = { expanded = !expanded }) {
+                Icon(
+                    imageVector = if (expanded) Filled.ExpandLess else Filled.ExpandMore,
+                    contentDescription = if (expanded) {
+                        stringResource(R.string.show_less)
+                    } else {
+                        stringResource(R.string.show_more)
+                    }
+                )
             }
         }
     }
 
 }
 
+@Preview(
+    showBackground = true,
+    widthDp = 320,
+    uiMode = UI_MODE_NIGHT_YES,
+    name = "GreetingsPreviewDark"
+    )
 @Preview(showBackground = true, widthDp = 320)
 @Composable
 fun GreetingPreview() {
@@ -134,6 +170,12 @@ fun GreetingPreview() {
     }
 }
 
+@Preview(
+    showBackground = true,
+    widthDp = 320,
+    uiMode = UI_MODE_NIGHT_YES,
+    name = "GreetingsPreviewDark"
+)
 @Preview
 @Composable
 fun MyAppPreview() {
@@ -141,4 +183,6 @@ fun MyAppPreview() {
         MyApp(Modifier.fillMaxSize())
     }
 }
+
+
 
